@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "distribution": "omp",
+  "productName": "oh-my-pi (omp)",
+  "configNextStep": "run `omp`, then `/aidlc --doctor`",
+  "harnessDir": ".aidlc",
+  "onboarding": ".aidlc/onboarding.md",
+  "managedDirectories": [
+    ".aidlc",
+    ".omp",
+    "aidlc"
+  ],
+  "rootIntegrations": [
+    {
+      "path": ".gitignore",
+      "policy": "managed-block",
+      "marker": "gitignore",
+      "shared": "union",
+      "legacySignatures": {
+        "wholeFileHashes": [
+          "sha256:d2569b56aef154c3c04766ed3263947a2d8026c99546a3006775526641951db9",
+          "sha256:ced6459be00ce352fe298e1ff07759933fa2ebf07a9151ef2f1af995579f7afd"
+        ]
+      }
+    },
+    {
+      "path": "AGENTS.md",
+      "policy": "managed-block",
+      "marker": "agents",
+      "shared": "identical",
+      "legacySignatures": {
+        "wholeFileHashes": [
+          "sha256:c5b990429fe6dfa084d58fc592d1d22c1170cc35aa98f9cbb2c82b9924520eda",
+          "sha256:6de1298dfa4c2b6916f66d372b844faf23481c8f258eedd595c1423dab8e106d"
+        ]
+      }
+    }
+  ]
+}

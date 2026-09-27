@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "distribution": "omp",
+  "productName": "oh-my-pi (omp)",
+  "configNextStep": "run `omp`, then `/aidlc --doctor`",
+  "name": "omp",
+  "harnessDir": ".aidlc",
+  "rulesSubdir": "rules"
+}
