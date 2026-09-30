@@ -501,6 +501,7 @@ export function readConfigDiagnosticRecords(harnessRoot: string): ConfigDiagnost
     distribution !== "cursor" &&
     distribution !== "kiro" &&
     distribution !== "kiro-ide" &&
+    distribution !== "omp" &&
     distribution !== "opencode"
   ) {
     throw new Error(`${path}: distribution must name a supported harness`);

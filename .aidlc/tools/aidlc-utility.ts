@@ -3558,6 +3558,7 @@ export async function collectDoctorReport(
   const harness = harnessDir();
   const harnessName = runtimeHarnessName(projectDir, harness);
   const isCopilot = harnessName === "copilot";
+  const isOmp = harnessName === "omp";
   if (harness === ".claude") {
     // Claude Code: the EXPECTED roster is the set of aidlc-*.ts hooks that
     // settings.json actually wires (its `hooks` event blocks + the `statusLine`
@@ -3819,9 +3820,10 @@ export async function collectDoctorReport(
       });
     }
     if (harness === ".aidlc") {
-      // Two harnesses ship the .aidlc runtime dir; the adapter file names the
+      // Three harnesses ship the .aidlc runtime dir; the adapter file names the
       // flavor. Copilot: a hooks/ shim inside the engine dir (wired by
       // .github/hooks/aidlc.json). opencode: a plugin in the .opencode shell.
+      // omp: an extension in the .omp shell (auto-loaded by omp).
       const copilotAdapter = join(projectDir, harness, "hooks", "aidlc-copilot-adapter.ts");
       if (isCopilot) {
         results.push({
@@ -3830,6 +3832,16 @@ export async function collectDoctorReport(
           fix: projectedFileRepair(
             "copilot",
             ".aidlc/hooks/aidlc-copilot-adapter.ts",
+          ),
+        });
+      } else if (isOmp) {
+        const ompAdapter = join(projectDir, ".omp", "extensions", "aidlc-omp-adapter.ts");
+        results.push({
+          pass: existsSync(ompAdapter),
+          label: "extensions/aidlc-omp-adapter.ts present (hook wiring)",
+          fix: projectedFileRepair(
+            "omp",
+            ".omp/extensions/aidlc-omp-adapter.ts",
           ),
         });
       } else {
@@ -3998,6 +4010,15 @@ export async function collectDoctorReport(
         fix: projectedFileRepair("cursor", `.cursor/${file}`),
       });
     }
+  } else if (harness === ".aidlc" && isOmp) {
+    // omp: no project-root config file. The /aidlc command is registered by the
+    // auto-loaded .omp/extensions adapter and the method tree ships in the
+    // .omp/skills shell; the adapter itself is checked with the hook roster above.
+    results.push({
+      pass: existsSync(join(projectDir, ".omp", "skills", "aidlc", "SKILL.md")),
+      label: ".omp/skills/aidlc/SKILL.md present (/aidlc entry point)",
+      fix: projectedFileRepair("omp", ".omp/skills/aidlc/SKILL.md"),
+    });
   } else if (harness === ".aidlc") {
     // opencode: the wiring config is the project-root opencode.json/jsonc
     // (permissions + the method-include instructions glob) plus the /aidlc
@@ -6315,6 +6336,7 @@ const SCAN_EXCLUDE = new Set([
   ".kiro",
   ".codex",
   ".opencode",
+  ".omp",
   ".aidlc",
   ".cursor",
   "aidlc-docs",
