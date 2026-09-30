@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build Signal — feedback triage</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-testid="dashboard-root">
+    <header class="page-header">
+      <h1>Build Signal</h1>
+      <p class="hint">
+        Internal spike: submit feedback, then read the weekly themes, the trend and the urgent items.
+      </p>
+    </header>
+
+    <main>
+      <section class="panel" aria-labelledby="submit-heading">
+        <h2 id="submit-heading">Submit feedback</h2>
+        <form data-testid="dashboard-submit-form">
+          <label for="feedback-text">Feedback</label>
+          <textarea
+            id="feedback-text"
+            name="text"
+            rows="3"
+            required
+            data-testid="dashboard-feedback-text"
+          ></textarea>
+
+          <label for="feedback-email">Your email (optional)</label>
+          <input
+            id="feedback-email"
+            name="submitter_email"
+            type="email"
+            data-testid="dashboard-feedback-email"
+          />
+
+          <label for="feedback-area">Product area (optional)</label>
+          <input id="feedback-area" name="product_area" data-testid="dashboard-feedback-area" />
+
+          <button type="submit" data-testid="dashboard-submit-button">Send</button>
+        </form>
+        <p class="status" data-testid="dashboard-submit-status" role="status"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="filters-heading">
+        <h2 id="filters-heading">Filters</h2>
+        <form data-testid="dashboard-filter-form">
+          <label for="filter-category">Category</label>
+          <select id="filter-category" data-testid="dashboard-filter-category"></select>
+
+          <label for="filter-sentiment">Sentiment</label>
+          <select id="filter-sentiment" data-testid="dashboard-filter-sentiment"></select>
+
+          <label for="filter-urgency">Urgency</label>
+          <select id="filter-urgency" data-testid="dashboard-filter-urgency"></select>
+
+          <button type="submit" data-testid="dashboard-filter-apply">Apply filters</button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">This week</h2>
+        <p data-testid="dashboard-summary">Loading…</p>
+      </section>
+
+      <section class="panel" aria-labelledby="themes-heading">
+        <h2 id="themes-heading">Themes</h2>
+        <ul data-testid="dashboard-themes"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="trends-heading">
+        <h2 id="trends-heading">Trend</h2>
+        <ul class="trend" data-testid="dashboard-trends"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="urgent-heading">
+        <h2 id="urgent-heading">Urgent items</h2>
+        <ul data-testid="dashboard-urgent"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="drilldown-heading" hidden data-testid="dashboard-drilldown-panel">
+        <h2 id="drilldown-heading">Theme drill-down</h2>
+        <p data-testid="dashboard-drilldown-summary"></p>
+        <ul data-testid="dashboard-drilldown"></ul>
+        <button type="button" data-testid="dashboard-drilldown-close">Close</button>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

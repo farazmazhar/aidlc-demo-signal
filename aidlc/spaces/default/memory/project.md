@@ -66,3 +66,5 @@
 
 <!-- Project-specific corrections from human feedback. -->
 <!-- Format: NEVER/ALWAYS [behavior] (learned [date]) -->
+- Read an audience phrase in the initial description (for example "for early-stage product teams") as our own team's context unless a human answer says otherwise; at Intent Capture the customer was confirmed as our own product and support team, an internal tool rather than an external product. (learned 2026-09-27) <!-- cid:260927-signal-feedback-triage:intent-capture:d867d07627b374aa9cf87bae6013ffa8f04770aeb8e9a2a1f4e460bbe3f30e22 -->
+- Use the stage's own wording for the pre-generation summary prompt (for example "…before I generate the requirements artifact?") rather than the generic protocol phrasing. (learned 2026-09-28) <!-- cid:260927-signal-feedback-triage:requirements-analysis:956135e63964da846555b2072bc4bae0547aedf43c0143b1ed977e0bfe12eb0b -->

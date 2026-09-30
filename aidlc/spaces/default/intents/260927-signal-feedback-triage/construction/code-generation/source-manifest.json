@@ -1,0 +1,195 @@
+{
+  "stage": "code-generation",
+  "version": 1,
+  "writes": [
+    {
+      "path": "package.json"
+    },
+    {
+      "path": "tsconfig.json"
+    },
+    {
+      "path": "tsconfig.build.json"
+    },
+    {
+      "path": "bunfig.toml"
+    },
+    {
+      "path": "eslint.config.js"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "compose.yaml"
+    },
+    {
+      "path": "config/config.env"
+    },
+    {
+      "path": "db/migrations/001_init.sql"
+    },
+    {
+      "path": "db/schema.test.ts"
+    },
+    {
+      "path": "src/config/config.ts"
+    },
+    {
+      "path": "src/domain/types.ts"
+    },
+    {
+      "path": "src/domain/ports.ts"
+    },
+    {
+      "path": "src/domain/validation.ts"
+    },
+    {
+      "path": "src/domain/vector-math.ts"
+    },
+    {
+      "path": "src/persistence/dynamo-keys.ts"
+    },
+    {
+      "path": "src/persistence/dynamo-repository.ts"
+    },
+    {
+      "path": "src/persistence/pg-schema.ts"
+    },
+    {
+      "path": "src/persistence/pgvector-store.ts"
+    },
+    {
+      "path": "src/persistence/in-memory.ts"
+    },
+    {
+      "path": "src/persistence/persistence.test.ts"
+    },
+    {
+      "path": "src/providers/types.ts"
+    },
+    {
+      "path": "src/providers/ollama.ts"
+    },
+    {
+      "path": "src/providers/bedrock.ts"
+    },
+    {
+      "path": "src/providers/factory.ts"
+    },
+    {
+      "path": "src/business/enrichment.ts"
+    },
+    {
+      "path": "src/business/clustering.ts"
+    },
+    {
+      "path": "src/business/summarise.ts"
+    },
+    {
+      "path": "src/business/dashboard.ts"
+    },
+    {
+      "path": "src/business/job.ts"
+    },
+    {
+      "path": "src/business/business.test.ts"
+    },
+    {
+      "path": "src/api/errors.ts"
+    },
+    {
+      "path": "src/api/request-body.ts"
+    },
+    {
+      "path": "src/api/static-assets.ts"
+    },
+    {
+      "path": "src/api/routes.ts"
+    },
+    {
+      "path": "src/api/handler.ts"
+    },
+    {
+      "path": "src/api/handlers.test.ts"
+    },
+    {
+      "path": "src/lambda/dependencies.ts"
+    },
+    {
+      "path": "src/lambda/api-lambda.ts"
+    },
+    {
+      "path": "src/lambda/clustering-lambda.ts"
+    },
+    {
+      "path": "src/dashboard/ui.test.ts"
+    },
+    {
+      "path": "dashboard/static/index.html"
+    },
+    {
+      "path": "dashboard/static/app.js"
+    },
+    {
+      "path": "dashboard/static/styles.css"
+    },
+    {
+      "path": "infra/config.ts"
+    },
+    {
+      "path": "infra/lib/signal-stack.ts"
+    },
+    {
+      "path": "infra/lib/signal-app.ts"
+    },
+    {
+      "path": "infra/bin/app.ts"
+    },
+    {
+      "path": "scripts/zip.ts"
+    },
+    {
+      "path": "scripts/emulator-up.sh"
+    },
+    {
+      "path": "scripts/emulator-probe.ts"
+    },
+    {
+      "path": "scripts/db-migrate.ts"
+    },
+    {
+      "path": "scripts/build-lambda.ts"
+    },
+    {
+      "path": "scripts/deploy.ts"
+    },
+    {
+      "path": "scripts/verify-infra.ts"
+    },
+    {
+      "path": "scripts/invoke-clustering.ts"
+    },
+    {
+      "path": "scripts/smoke.ts"
+    },
+    {
+      "path": "tests/factories.ts"
+    },
+    {
+      "path": "tests/fakes.ts"
+    },
+    {
+      "path": "build/"
+    },
+    {
+      "path": "cdk.out/"
+    },
+    {
+      "path": ".signal-stack.json"
+    }
+  ]
+}

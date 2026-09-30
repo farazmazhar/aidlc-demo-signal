@@ -1,0 +1,75 @@
+name: signal-demo
+
+# Local-only stack: the AWS emulator, Postgres with pgvector, and Ollama.
+# One user-defined network so Lambda containers started by the emulator can
+# resolve `postgres` and `ollama` by their aliases (risk R4). The network is
+# named explicitly so LAMBDA_DOCKER_NETWORK can reference the exact string.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: signal-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-signal}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-signal}
+      POSTGRES_DB: ${POSTGRES_DB:-signal}
+    ports:
+      - "5432:5432"
+    volumes:
+      - signal-pgdata:/var/lib/postgresql/data
+    networks:
+      signal-net:
+        aliases:
+          - postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-signal} -d ${POSTGRES_DB:-signal}"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: signal-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - signal-ollama:/root/.ollama
+    networks:
+      signal-net:
+        aliases:
+          - ollama
+
+  emulator:
+    image: ${EMULATOR_IMAGE:-localstack/localstack:3.8.1}
+    container_name: signal-emulator
+    ports:
+      - "4566:4566"
+    environment:
+      # The five mandated services plus S3 (Lambda artefacts) and SSM, which the
+      # synthesised template's BootstrapVersion parameter resolves through.
+      # The five mandated services (apigateway, cloudformation, dynamodb, lambda,
+      # ses) plus what the deploy path needs: iam (the stack's roles), s3 (Lambda
+      # artefacts), ssm (the CDK BootstrapVersion parameter) and logs (Lambda logs).
+      SERVICES: apigateway,cloudformation,dynamodb,iam,lambda,logs,s3,scheduler,ses,ssm
+      LAMBDA_EXECUTOR: docker
+      LAMBDA_DOCKER_NETWORK: signal-demo_signal-net
+      PERSISTENCE: "0"
+      DEBUG: ${EMULATOR_DEBUG:-0}
+      DOCKER_HOST: unix:///var/run/docker.sock
+    volumes:
+      # scripts/emulator-up.sh discovers the real socket (rootless Podman keeps it
+      # under XDG_RUNTIME_DIR) and exports DOCKER_SOCKET; this default is the
+      # standard Docker host path for a direct `docker compose` run.
+      - ${DOCKER_SOCKET:-/var/run/docker.sock}:/var/run/docker.sock
+    networks:
+      signal-net:
+        aliases:
+          - emulator
+
+volumes:
+  signal-pgdata:
+  signal-ollama:
+
+networks:
+  signal-net:
+    name: signal-demo_signal-net

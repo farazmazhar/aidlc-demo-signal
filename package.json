@@ -1,0 +1,46 @@
+{
+  "name": "signal-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Build Signal — local feasibility spike for feedback capture, LLM classification, embedding, weekly theme clustering and a dashboard. Runs entirely against a local AWS emulator with zero cloud spend.",
+  "type": "commonjs",
+  "scripts": {
+    "build": "bun run typecheck && bun scripts/build-lambda.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "bun test",
+    "db:migrate": "bun --env-file=config/config.env scripts/db-migrate.ts",
+    "emulator:up": "bash scripts/emulator-up.sh",
+    "emulator:probe": "bun --env-file=config/config.env scripts/emulator-probe.ts",
+    "cdk:synth": "bun --env-file=config/config.env infra/bin/app.ts",
+    "deploy": "bun --env-file=config/config.env scripts/deploy.ts",
+    "verify:infra": "bun --env-file=config/config.env scripts/verify-infra.ts",
+    "invoke:clustering": "bun --env-file=config/config.env scripts/invoke-clustering.ts",
+    "smoke": "bun --env-file=config/config.env scripts/smoke.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-api-gateway": "^3.700.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.700.0",
+    "@aws-sdk/client-cloudformation": "^3.700.0",
+    "@aws-sdk/client-dynamodb": "^3.700.0",
+    "@aws-sdk/client-lambda": "^3.700.0",
+    "@aws-sdk/client-s3": "^3.700.0",
+    "@aws-sdk/client-scheduler": "^3.700.0",
+    "@aws-sdk/client-ses": "^3.700.0",
+    "@aws-sdk/client-ssm": "^3.1142.0",
+    "@aws-sdk/lib-dynamodb": "^3.700.0",
+    "pg": "^8.13.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "@types/node": "^22.10.1",
+    "@types/pg": "^8.11.10",
+    "aws-cdk-lib": "^2.170.0",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0"
+  }
+}

@@ -1,0 +1,4 @@
+# Test runner configuration for the Minimal-strategy unit scope.
+# `poc` adds no coverage floor, so no coverage threshold is configured here.
+[test]
+root = "."

@@ -1,0 +1,108 @@
+/* Build Signal dashboard — minimal layout, no external assets (NFR5). */
+
+:root {
+  color-scheme: light dark;
+  --border: #c9ccd1;
+  --muted: #5b6068;
+  --accent: #2f6feb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1.5rem;
+  font-family: system-ui, sans-serif;
+  line-height: 1.45;
+  max-width: 70rem;
+  margin-inline: auto;
+}
+
+.page-header h1 {
+  margin-bottom: 0.25rem;
+}
+
+.hint,
+.status,
+em {
+  color: var(--muted);
+}
+
+main {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+}
+
+button {
+  margin-top: 0.75rem;
+  width: auto;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.trend li {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr 2rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trend-bar {
+  display: inline-block;
+  height: 0.6rem;
+  min-width: 1px;
+  background: var(--accent);
+}
+
+.trend-count {
+  text-align: right;
+  color: var(--muted);
+}

@@ -81,3 +81,11 @@ aidlc/diagnostics/
 # concurrent appends — there is intentionally NO .gitattributes merge=union,
 # which was proven to corrupt the multi-line audit blocks) ·
 # aidlc/spaces/*/intents/*/<phase>/<stage>/*.md (artifacts + diary).
+
+# Build Signal — local spike artifacts
+dist/
+build/
+cdk.out/
+coverage/
+.signal-stack.json
+config/config.local.env
